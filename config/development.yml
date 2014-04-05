@@ -1,0 +1,2 @@
+ds_api: http://lmapi.casa.it.dsapp.casa.casa-dev.vpc.realestate.com.au/v1/rent?category=vacanze&where=
+availability_api: http://127.0.0.1:4567/availabilities/
