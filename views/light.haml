@@ -1,0 +1,22 @@
+#lights{:'data-role' => 'page'}
+  %div{:'data-role' => 'header'}
+    %hi 灯光
+  .ui-content{:'data-role' => 'main'}
+    - lights.each do |light|
+      .light.ui-field-contain
+        %label{:for => "light#{light[:id]}"}= light[:name]
+        %select{:name => "light#{light[:id]}", :'data-role' => 'slider', :'data-light-id' => "#{light[:id]}"}
+          %option{:value => 'off'} Off
+          %option{:value => 'on'} On
+:javascript
+  $(".light select").on('change', function(event, ui){
+    console.log(event);
+    console.log($(event.target).val());
+    var status = {status: $(event.target).val()}
+    $.ajax({
+      url: "/lights/" + $(event.target).data('light-id'),
+      type: 'PUT',
+      contentType: 'application/json',
+      data: JSON.stringify(status)
+    });
+  });
